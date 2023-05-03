@@ -87,10 +87,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="#">Registrar</a>
-        <a class="nav-link" href="#">Actualizar</a>
-        <a class="nav-link" href="#">Borrar</a>
-        <a class="nav-link" href="#">Ver medicamentos</a>
+        <a class="nav-link" href="{{ url('/medicamentos/create') }}">Registrar</a>
+        <a class="nav-link" href="{{ url('/medicamentos/read') }}">Actualizar</a>
+        <a class="nav-link" href="{{ url('/medicamentos/read') }}">Borrar</a>
+        <a class="nav-link" href="{{ url('/medicamentos/read') }}">Ver medicamentos</a>
       </div>
     </div>
   </div>

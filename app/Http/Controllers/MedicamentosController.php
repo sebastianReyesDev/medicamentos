@@ -43,38 +43,36 @@ class MedicamentosController extends Controller
         $medicamento -> unidades = $request -> unidades;
         $medicamento -> save();
     
-        return redirect()->route('medicamentos.createComplete')->with('success', 'Medicamento registrado correctamente');    
+        return redirect()->route('medicamentos.complete')->with('success', 'Medicamento registrado correctamente');    
     }
 
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'nombre' => 'required|min:3',
-        'tipo' => 'required',
-        'presentacion' => 'required',
-        'fecha' => 'required',
-        'gramaje' => 'required',
-        'fecha_caducidad' => 'required|date',
-        'unidades' => 'required|integer',
-    ]);
-
+    {
     $medicamento = Medicamento::find($id);
 
-    if (!$medicamento) {
-        abort(404);
+    $medicamento->nombre = $request->input('nombre');
+    $medicamento->tipo = $request->input('tipo');
+    $medicamento->presentacion = $request->input('presentacion');
+    $medicamento->gramaje = $request->input('gramaje');
+    $medicamento->fecha_caducidad = $request->input('fecha_caducidad');
+    $medicamento->unidades = $request->input('unidades');
+    $medicamento->fecha = $request->input('fecha');
+
+    $medicamento->save();
+    
+    return redirect()->route('medicamentos.index')->with('success', 'Medicamento actualizado correctamente'); 
     }
 
-    $medicamento->nombre = $request->nombre;
-    $medicamento->tipo = $request->tipo;
-    $medicamento->presentacion = $request->presentacion;
-    $medicamento->fecha = $request->fecha;
-    $medicamento->gramaje = $request->gramaje;
-    $medicamento->fecha_caducidad = $request->fecha_caducidad;
-    $medicamento->unidades = $request->unidades;
-    $medicamento->save();
 
-    return redirect()->route('medicamentos.index')->with('success', 'Medicamento actualizado correctamente');
+
+public function destroy($id)
+{
+    $medicamento = Medicamento::findOrFail($id);
+    $medicamento->delete();
+    
+    return redirect()->route('medicamentos.complete')->with('success', 'Medicamento eliminado exitosamente');
 }
+
     
     public function edit()
     {

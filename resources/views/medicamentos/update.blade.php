@@ -1,44 +1,39 @@
 @extends('principal')
 
 @section('menu')
-    <div class="container">
-        <h1>Editar medicamento</h1>
+    <div class="container w-25 border p-4">
         <form method="POST" action="{{ route('medicamentos.update', $medicamento->id) }}">
             @csrf
             @method('PUT')
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $medicamento->nombre }}" required>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre del medicamento</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre', $medicamento->nombre) }}">
             </div>
-            <div class="form-group">
-                <label for="tipo">Tipo:</label>
-                <select class="form-control" id="tipo" name="tipo" required>
-                    <option value="jarabe" @if($medicamento->tipo == 'jarabe') selected @endif>Jarabe</option>
-                    <option value="pastilla" @if($medicamento->tipo == 'pastilla') selected @endif>Pastilla</option>
-                    <option value="inyeccion" @if($medicamento->tipo == 'inyeccion') selected @endif>Inyección</option>
-                </select>
+            <div class="mb-3">
+                <label for="tipo" class="form-label">Tipo de medicamento</label>
+                <input type="text" class="form-control" id="tipo" name="tipo" value="{{ old('tipo', $medicamento->tipo) }}">
             </div>
-            <div class="form-group">
-                <label for="presentacion">Presentación:</label>
-                <input type="text" class="form-control" id="presentacion" name="presentacion" value="{{ $medicamento->presentacion }}" required>
+            <div class="mb-3">
+                <label for="presentacion" class="form-label">Presentación</label>
+                <input type="text" class="form-control" id="presentacion" name="presentacion" value="{{ old('presentacion', $medicamento->presentacion) }}">
             </div>
-            <div class="form-group">
-                <label for="gramaje">Gramaje:</label>
-                <input type="number" class="form-control" id="gramaje" name="gramaje" value="{{ $medicamento->gramaje }}" required>
+            <div class="mb-3">
+                <label for="gramaje" class="form-label">Gramaje</label>
+                <input type="text" class="form-control" id="gramaje" name="gramaje" value="{{ old('gramaje', $medicamento->gramaje) }}">
             </div>
-            <div class="form-group">
-                <label for="fecha_caducidad">Fecha de caducidad:</label>
-                <input type="date" class="form-control" id="fecha_caducidad" name="fecha_caducidad" value="{{ $medicamento->fecha_caducidad }}" required>
+            <div class="mb-3">
+                <label for="fecha_caducidad" class="form-label">Fecha de caducidad</label>
+                <input type="date" class="form-control" id="fecha_caducidad" name="fecha_caducidad" value="{{ old('fecha_caducidad', $medicamento->fecha_caducidad) }}">
             </div>
-            <div class="form-group">
-                <label for="unidades">Unidades:</label>
-                <input type="number" class="form-control" id="unidades" name="unidades" value="{{ $medicamento->unidades }}" required>
+            <div class="mb-3">
+                <label for="unidades" class="form-label">Unidades</label>
+                <input type="number" class="form-control" id="unidades" name="unidades" value="{{ old('unidades', $medicamento->unidades) }}">
             </div>
-            <div class="form-group">
-                <label for="fecha">Fecha de registro:</label>
-                <input type="date" class="form-control" id="fecha" name="fecha" value="{{ $medicamento->fecha }}" required>
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha de registro</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" value="{{ old('fecha', $medicamento->fecha) }}">
             </div>
-            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <button type="submit" class="btn btn-success">Actualizar</button>
         </form>
     </div>
 @endsection

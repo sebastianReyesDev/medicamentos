@@ -25,6 +25,20 @@
                         <td>{{ $medicamento->fecha_caducidad }}</td>
                         <td>{{ $medicamento->unidades }}</td>
                         <td>{{ $medicamento->fecha }}</td>
+                        <td>
+                            <form method="POST" action="{{ route('medicamentos.destroy', $medicamento->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" data-id="{{ $medicamento->id }}">Eliminar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="{{ route('medicamentos.update', $medicamento->id) }}">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn btn-primary" data-id="{{ $medicamento->id }}">Modificar</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
