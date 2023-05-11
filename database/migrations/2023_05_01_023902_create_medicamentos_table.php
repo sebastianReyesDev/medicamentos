@@ -14,7 +14,7 @@ class CreateMedicamentosTable extends Migration
     public function up()
     {
         Schema::create('medicamentos', function (Blueprint $table) {
-            $table->bigIncrements('id');;
+            $table->id();
             $table->string('nombre');
             $table->string('tipo');
             $table->string('presentacion');

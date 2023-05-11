@@ -88,9 +88,9 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="{{ url('/medicamentos/create') }}">Registrar</a>
-        <a class="nav-link" href="{{ url('/medicamentos/read') }}">Actualizar</a>
-        <a class="nav-link" href="{{ url('/medicamentos/read') }}">Borrar</a>
-        <a class="nav-link" href="{{ url('/medicamentos/read') }}">Ver medicamentos</a>
+        <a class="nav-link" href="{{ url('/medicamentos/') }}">Actualizar</a>
+        <a class="nav-link" href="{{ url('/medicamentos/') }}">Borrar</a>
+        <a class="nav-link" href="{{ url('/medicamentos/') }}">Ver medicamentos</a>
       </div>
     </div>
   </div>

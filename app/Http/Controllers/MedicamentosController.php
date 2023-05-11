@@ -17,66 +17,47 @@ class MedicamentosController extends Controller
     
     public function index()
     {
-    $medicamentos = Medicamento::all();
-    return view('medicamentos.index', compact('medicamentos'));
+    $medicamentos['medicamentos']= Medicamento::all();
+    return view('medicamentos.index', $medicamentos);
     }
     
-    public function score(Request $request){
+    public function create(){
+        return view('medicamentos.create'); 
+    }
 
-        $request -> validate([
-            'nombre' => 'required|min:3',
-            'tipo' => 'required',
-            'presentacion' => 'required',
-            'fecha' => 'required',
-            'gramaje' => 'required',
-            'fecha_caducidad' => 'required|date',
-            'unidades' => 'required|integer',
-        ]);
-    
-        $medicamento = new Medicamento;
-        $medicamento -> nombre = $request -> nombre;
-        $medicamento -> tipo = $request -> tipo;
-        $medicamento -> presentacion = $request -> presentacion;
-        $medicamento -> fecha = $request -> fecha;
-        $medicamento -> gramaje = $request -> gramaje;
-        $medicamento -> fecha_caducidad = $request -> fecha_caducidad;
-        $medicamento -> unidades = $request -> unidades;
-        $medicamento -> save();
-    
-        return redirect()->route('medicamentos.complete')->with('success', 'Medicamento registrado correctamente');    
+    public function store(Request $request){
+
+        $datosMedicamentos = request()->except('_token');
+        if($request->hasFile('Foto')){
+            $datosMedicamentos['Foto']=$request->file('Foto')->store('uploads', 'public'); 
+        }
+
+        Medicamento::insert($datosMedicamentos);
+        
+        return redirect ('medicamentos/'); 
     }
 
     public function update(Request $request, $id)
     {
-    $medicamento = Medicamento::find($id);
-
-    $medicamento->nombre = $request->input('nombre');
-    $medicamento->tipo = $request->input('tipo');
-    $medicamento->presentacion = $request->input('presentacion');
-    $medicamento->gramaje = $request->input('gramaje');
-    $medicamento->fecha_caducidad = $request->input('fecha_caducidad');
-    $medicamento->unidades = $request->input('unidades');
-    $medicamento->fecha = $request->input('fecha');
-
-    $medicamento->save();
     
-    return redirect()->route('medicamentos.index')->with('success', 'Medicamento actualizado correctamente'); 
+        $datosMedicamentos = request()->except(['_token', '_method']);
+        Medicamento::where('id','=',$id)->update($datosMedicamentos);
+
+        $medicamentos = Medicamento::findOrFail($id);
+        return redirect ('medicamentos/');
+
     }
-
-
 
 public function destroy($id)
 {
-    $medicamento = Medicamento::findOrFail($id);
-    $medicamento->delete();
-    
-    return redirect()->route('medicamentos.complete')->with('success', 'Medicamento eliminado exitosamente');
+    Medicamento::destroy($id);
+    return redirect ('medicamentos/');
 }
 
     
-    public function edit()
+    public function edit($id)
     {
-        $medicamentos = Medicamento::all();
+        $medicamentos = Medicamento::findOrFail($id);
         return view('medicamentos.edit', compact('medicamentos'));
     }
 }
