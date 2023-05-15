@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PersonalMedico;
 use Illuminate\Http\Request;
-use App\Models\Medicamento;
 
-class MedicamentosController extends Controller
+class PersonalMedicoController extends Controller
 {
-    /**
-     * index para mostrar todos los medicamentos
-     * score para guardar medicamentos
-     * update para actualizar un medicamento
-     * destroy para eliminar
-     * edit para mostrar un formulario de edicion
-     */
-    
     public function index()
     {
     $medicamentos['medicamentos']= Medicamento::all();
@@ -48,11 +40,11 @@ class MedicamentosController extends Controller
 
     }
 
-    public function destroy($id)
-    {
-        Medicamento::destroy($id);
-        return redirect ('medicamentos/');
-    }
+public function destroy($id)
+{
+    Medicamento::destroy($id);
+    return redirect ('medicamentos/');
+}
 
     
     public function edit($id)
